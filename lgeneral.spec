@@ -8,6 +8,7 @@ Group:		X11/Applications/Games
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/lgeneral/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-inst_dir.patch
+Patch1:		%{name}-configure_fix.patch
 URL:		http://lgames.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -34,6 +35,7 @@ warunki walki.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 rm -f missing
