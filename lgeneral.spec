@@ -8,9 +8,10 @@ Group:		Applications/Games
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/lgeneral/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 URL:		http://lgames.sourceforge.net/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	SDL-devel >= 1.1.4
-BuildRequires:	SDL_mixer >= 1.1.4
-#BuildRequires:	lgeneral-data >= 1.1.2
+BuildRequires:	SDL_mixer-devel >= 1.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -33,17 +34,18 @@ warunki walki.
 %setup -q
 
 %build
-
-%configure2_13
+%{__autoconf}
+%configure
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_applnkdir}/Games
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
+
+#install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games
 
 %clean
 rm -rf $RPM_BUILD_ROOT
