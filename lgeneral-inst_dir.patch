@@ -1,0 +1,12 @@
+diff -durN lgeneral-1.1.orig/configure.in lgeneral-1.1/configure.in
+--- lgeneral-1.1.orig/configure.in	Sat Jul 13 21:27:47 2002
++++ lgeneral-1.1/configure.in	Tue Jul 30 15:20:51 2002
+@@ -42,7 +42,7 @@
+ AC_SUBST(dl_flag)
+ 
+ dnl installation path
+-inst_dir=$datadir/games/lgeneral
++inst_dir=$datadir/lgeneral
+ inst_flag="-DSRC_DIR=\\\"$inst_dir\\\""
+ 
+ AC_ARG_ENABLE( install,
