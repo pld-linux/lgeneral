@@ -12,6 +12,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	SDL-devel >= 1.1.4
 BuildRequires:	SDL_mixer-devel >= 1.1.4
+Requires:	%{name}-data >= 1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
