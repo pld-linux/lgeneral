@@ -4,7 +4,7 @@ Name:		LGeneral
 Version:	1.1
 Release:	1
 License:	GPL
-Group:		X11/Games
+Group:	Games
 Source0:	http://ftp1.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
 Source1: %{name}.desktop
 URL:		http://lgames.sourceforge.net/
@@ -14,7 +14,7 @@ BuildRequires:	SDL_mixer >= 1.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
-%define		_applnkdir		/usr/X11R6/share/applnk
+%define		_applnkdir		%{_prefix}/share/applnk
 
 %description
 LGeneral is a turn-based strategy engine heavily inspired by Panzer General. You
@@ -40,8 +40,8 @@ posiada du¿o zaawansowanych opcji tj. wp³yw pogody na warunki walki.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/X11R6/share/applnk/Games
-install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/applnk/Games
+install -d $RPM_BUILD_ROOT%{_applnkdir}/Games
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
@@ -55,4 +55,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/games/lgeneral/themes/default/*.bmp
 %{_datadir}/games/lgeneral/gfx/*.bmp
 %{_datadir}/games/lgeneral/themes/default/*.wav
-%{_applnkdir}/Games/LGeneral.desktop
+#%{_applnkdir}/Games/LGeneral.desktop
