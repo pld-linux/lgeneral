@@ -36,7 +36,8 @@ warunki walki.
 %patch0 -p1
 
 %build
-aclocal
+rm -f missing
+%{__aclocal}
 %{__automake}
 %{__autoconf}
 %configure
