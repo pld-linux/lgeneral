@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=LGeneral
+Comment=Panzer General clone
+Comment[pl]=Klon gry Panzer General
+Exec=lgeneral
+Terminal=0
+Type=Application
+# vi: encoding=utf-8
