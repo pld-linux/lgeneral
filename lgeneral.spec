@@ -1,12 +1,12 @@
 Summary:	LGeneral game
 Summary(pl):	Gra Linux General
-Name:		LGeneral
+Name:		lgeneral
 Version:	1.1
 Release:	1
 License:	GPL
-Group:	Games
-Source0:	http://ftp1.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
-Source1: %{name}.desktop
+Group:		Applications/Games
+Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/lgeneral/%{name}-%{version}.tar.gz
+Source1:	%{name}.desktop
 URL:		http://lgames.sourceforge.net/
 BuildRequires:	SDL-devel >= 1.1.4
 BuildRequires:	SDL_mixer >= 1.1.4
@@ -14,20 +14,20 @@ BuildRequires:	SDL_mixer >= 1.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
-%define		_applnkdir		%{_prefix}/share/applnk
 
 %description
-LGeneral is a turn-based strategy engine heavily inspired by Panzer General. You
-
-play single scenarios or whole campaigns turn by turn against a human player or
-the AI. Entrenchment, rugged defense, defensive fire, surprise contacts,
-surrender, unit supply, weather influence, reinforcements and other
-implementations contribute to the tactical and strategic depth of the game.
+LGeneral is a turn-based strategy engine heavily inspired by Panzer
+General. You play single scenarios or whole campaigns turn by turn
+against a human player or the AI. Entrenchment, rugged defense,
+defensive fire, surprise contacts, surrender, unit supply, weather
+influence, reinforcements and other implementations contribute to the
+tactical and strategic depth of the game.
 
 %description -l pl
-LGeneral jest turow± gr± strategiczn± zainspirowan± o Panzer General. Mo¿na graæ
-scenariusze albo kampanie, przeciwko drugiemu graczowi albo komputerowi. Gra
-posiada du¿o zaawansowanych opcji tj. wp³yw pogody na warunki walki.
+LGeneral jest turow± gr± strategiczn± zainspirowan± o Panzer General.
+Mo¿na graæ scenariusze albo kampanie, przeciwko drugiemu graczowi albo
+komputerowi. Gra posiada du¿o zaawansowanych opcji tj. wp³yw pogody na
+warunki walki.
 
 %prep
 %setup -q
