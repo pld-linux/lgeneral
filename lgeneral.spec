@@ -5,7 +5,7 @@ Version:	1.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
-Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/lgeneral/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-inst_dir.patch
 Patch1:		%{name}-configure_fix.patch
@@ -15,7 +15,6 @@ BuildRequires:	automake
 BuildRequires:	SDL_mixer-devel >= 1.1.4
 Requires:	%{name}-data >= 1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %description
 LGeneral is a turn-based strategy engine heavily inspired by Panzer
