@@ -14,7 +14,7 @@ URL:		http://lgames.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	SDL_mixer-devel >= 1.1.4
-Requires:	%{name}-data >= 1.1
+Requires:	lgeneral-data >= 1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,7 +37,6 @@ warunki walki.
 #%patch1 -p1
 
 %build
-rm -f missing
 %{__aclocal}
 %{__automake}
 %{__autoconf}
@@ -47,11 +46,12 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_applnkdir}/Games/Strategy
+install -d $RPM_BUILD_ROOT%{_desktopdir}
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games/Strategy/%{name}.desktop
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -60,6 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/*
+%dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/ai_modules
 %dir %{_datadir}/%{name}/campaigns
 %dir %{_datadir}/%{name}/gfx
@@ -75,4 +76,4 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}/themes
 %{_datadir}/%{name}/themes/*
 %dir %{_datadir}/%{name}/units
-%{_applnkdir}/Games/Strategy/%{name}.desktop
+%{_desktopdir}/%{name}.desktop
