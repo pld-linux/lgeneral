@@ -6,6 +6,7 @@ Release:	1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
+# Source0-md5:	ba7fc938425a1832c2751e8ea4ed6cf7
 Source1:	%{name}.desktop
 Patch0:		%{name}-inst_dir.patch
 Patch1:		%{name}-configure_fix.patch
