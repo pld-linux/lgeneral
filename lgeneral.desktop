@@ -3,6 +3,6 @@ Name=LGeneral
 Comment=Panzer General clone
 Comment[pl]=Klon gry Panzer General
 Exec=lgeneral
-Terminal=0
+Terminal=false
 Type=Application
 # vi: encoding=utf-8
