@@ -16,7 +16,6 @@ BuildRequires:	SDL_mixer-devel >= 1.1.4
 Requires:	%{name}-data >= 1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix		/usr/X11R6
 
 %description
 LGeneral is a turn-based strategy engine heavily inspired by Panzer
