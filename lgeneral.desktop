@@ -6,4 +6,5 @@ Comment[pl]=Klon gry Panzer General
 Exec=lgeneral
 Terminal=false
 Type=Application
+Categories=Game;StrategyGame;
 # vi: encoding=utf-8
