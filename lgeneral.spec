@@ -4,14 +4,13 @@ Name:		lgeneral
 Version:	1.1
 Release:	1
 License:	GPL
-Group:		Applications/Games
+Group:		X11/Applications/Games
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/lgeneral/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-inst_dir.patch
 URL:		http://lgames.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	SDL-devel >= 1.1.4
 BuildRequires:	SDL_mixer-devel >= 1.1.4
 Requires:	%{name}-data >= 1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
