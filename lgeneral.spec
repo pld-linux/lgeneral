@@ -1,5 +1,5 @@
 Summary:	LGeneral game
-Summary(pl):	Gra Linux General
+Summary(pl.UTF-8):   Gra Linux General
 Name:		lgeneral
 Version:	1.2beta
 Release:	1
@@ -25,10 +25,10 @@ defensive fire, surprise contacts, surrender, unit supply, weather
 influence, reinforcements and other implementations contribute to the
 tactical and strategic depth of the game.
 
-%description -l pl
-LGeneral jest turow± gr± strategiczn± zainspirowan± o Panzer General.
-Mo¿na graæ scenariusze albo kampanie, przeciwko drugiemu graczowi albo
-komputerowi. Gra posiada du¿o zaawansowanych opcji tj. wp³yw pogody na
+%description -l pl.UTF-8
+LGeneral jest turowÄ… grÄ… strategicznÄ… zainspirowanÄ… o Panzer General.
+MoÅ¼na graÄ‡ scenariusze albo kampanie, przeciwko drugiemu graczowi albo
+komputerowi. Gra posiada duÅ¼o zaawansowanych opcji tj. wpÅ‚yw pogody na
 warunki walki.
 
 %prep
