@@ -1,5 +1,5 @@
 Summary:	LGeneral game
-Summary(pl.UTF-8):   Gra Linux General
+Summary(pl.UTF-8):	Gra Linux General
 Name:		lgeneral
 Version:	1.2beta
 Release:	1
