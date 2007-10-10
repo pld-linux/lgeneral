@@ -1,20 +1,22 @@
+%define _bver	13
+%define	_beta	beta-%{_bver}
 Summary:	LGeneral game
 Summary(pl.UTF-8):	Gra Linux General
 Name:		lgeneral
-Version:	1.2beta
-Release:	1
-License:	GPL
+Version:	1.2
+Release:	0.beta%{_bver}.1
+License:	GPL v2+
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
-# Source0-md5:	d89f6b574e0f182f04cd9b069225fc30
-Source1:	%{name}.desktop
-Patch0:		%{name}-inst_dir.patch
-Patch1:		%{name}-configure_fix.patch
+Source0:	http://dl.sourceforge.net/lgeneral/%{name}-%{version}%{_beta}.tar.gz
+# Source0-md5:	ac8d4ec71a2e263d38a650a158e25da5
+Source1:	http://dl.sourceforge.net/lgeneral/pg-data.tar.gz
+# Source1-md5:	40c4be23f60d1dc732aabe13b58fc5e3
+Source2:	%{name}.desktop
 URL:		http://lgames.sourceforge.net/
+BuildRequires:  SDL_mixer-devel >= 1.1.4
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	SDL_mixer-devel >= 1.1.4
-Requires:	lgeneral-data >= 1.1
+BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -32,17 +34,16 @@ komputerowi. Gra posiada dużo zaawansowanych opcji tj. wpływ pogody na
 warunki walki.
 
 %prep
-%setup -q
-%patch0 -p1
-#%patch1 -p1
+%setup -q -n %{name}-%{version}%{_beta}
+%{__sed} -i 's@$datadir/games/lgeneral@$datadir/lgeneral@' configure.in
 
 %build
-%{__aclocal}
-%{__automake}
-%{__autoconf}
 %configure
 
-%{__make}
+cp /usr/share/gettext/config.rpath .
+%{__make} \
+	ACLOCAL="%{__aclocal}" \
+	AUTOMAKE="automake -a -c -f"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -51,7 +52,7 @@ install -d $RPM_BUILD_ROOT%{_desktopdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
