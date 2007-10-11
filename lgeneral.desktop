@@ -4,6 +4,7 @@ Name=LGeneral
 Comment=Panzer General clone
 Comment[pl]=Klon gry Panzer General
 Exec=lgeneral
+Icon=lgeneral.png
 Terminal=false
 Type=Application
 Categories=Game;StrategyGame;
