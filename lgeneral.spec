@@ -1,3 +1,8 @@
+# NOTE:
+# To play the game with original Panzer General campaigns and scenarios 
+# we need to run this command as root after install:
+# lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
+
 %define _bver	13
 %define	_beta	beta-%{_bver}
 Summary:	LGeneral game
@@ -34,12 +39,13 @@ komputerowi. Gra posiada dużo zaawansowanych opcji tj. wpływ pogody na
 warunki walki.
 
 %prep
-%setup -q -n %{name}-%{version}%{_beta}
+%setup -q -n %{name}-%{version}%{_beta} -a 1
 %{__sed} -i 's@games/@@' {configure.in,src/misc.c,lgc-pg/misc.c}
 
 %build
 %configure
 
+#Maybe somebody know better way?
 cp /usr/share/gettext/config.rpath .
 %{__make} \
 	ACLOCAL="%{__aclocal}" \
@@ -53,6 +59,7 @@ install -d $RPM_BUILD_ROOT%{_desktopdir}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
+cp -r pg-data $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 %find_lang %{name} --all-name
 
