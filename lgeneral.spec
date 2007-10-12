@@ -11,7 +11,7 @@ Name:		lgeneral
 Version:	1.2
 Release:	0.beta%{_bver}.1
 License:	GPL v2+
-Group:		X11/Applications/Games
+Group:		X11/Applications/Games/Strategy
 Source0:	http://dl.sourceforge.net/lgeneral/%{name}-%{version}%{_beta}.tar.gz
 # Source0-md5:	ac8d4ec71a2e263d38a650a158e25da5
 Source1:	http://dl.sourceforge.net/lgeneral/pg-data.tar.gz
