@@ -3,7 +3,7 @@
 # we need to run this command as root after install:
 # lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
 
-%define _bver	13
+%define _bver	14
 %define	_beta	beta-%{_bver}
 Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
@@ -12,9 +12,9 @@ Version:	1.2
 Release:	0.beta%{_bver}.1
 License:	GPL v2+
 Group:		X11/Applications/Games/Strategy
-Source0:	http://dl.sourceforge.net/lgeneral/%{name}-%{version}%{_beta}.tar.gz
-# Source0-md5:	ac8d4ec71a2e263d38a650a158e25da5
-Source1:	http://dl.sourceforge.net/lgeneral/pg-data.tar.gz
+Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}%{_beta}.tar.gz
+# Source0-md5:	c8cdf4320c3847976a393adac65b5e42
+Source1:	http://downloads.sourceforge.net/lgeneral/pg-data.tar.gz
 # Source1-md5:	40c4be23f60d1dc732aabe13b58fc5e3
 Source2:	%{name}.desktop
 URL:		http://lgames.sourceforge.net/
@@ -49,7 +49,7 @@ opcji jak na przykład wpływ pogody na warunki walki.
 cp %{_datadir}/gettext/config.rpath .
 %{__make} \
 	ACLOCAL="%{__aclocal}" \
-	AUTOMAKE="automake -a -c -f"
+	AUTOMAKE="%{__automake}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
