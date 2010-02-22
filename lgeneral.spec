@@ -10,7 +10,7 @@ Source0:	http://dl.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-inst_dir.patch
 Patch1:		%{name}-configure_fix.patch
-URL:		http://lgames.sourceforge.net/
+URL:		http://lgames.sourceforge.net/index.php?project=LGeneral
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	SDL_mixer-devel >= 1.1.4
