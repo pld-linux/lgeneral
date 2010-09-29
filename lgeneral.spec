@@ -1,12 +1,12 @@
 Summary:	LGeneral game
 Summary(pl.UTF-8):	Gra Linux General
 Name:		lgeneral
-Version:	1.2beta
-Release:	1
+Version:	1.2
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
-# Source0-md5:	d89f6b574e0f182f04cd9b069225fc30
+# Source0-md5:	a34eae8bc2c05cfa81fe9a9994988613
 Source1:	%{name}.desktop
 Patch0:		%{name}-inst_dir.patch
 Patch1:		%{name}-configure_fix.patch
@@ -33,7 +33,7 @@ warunki walki.
 
 %prep
 %setup -q
-%patch0 -p1
+#%patch0 -p1
 #%patch1 -p1
 
 %build
