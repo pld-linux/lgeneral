@@ -1,9 +1,9 @@
+#
 # NOTE:
 # To play the game with original Panzer General campaigns and scenarios
 # we need to run this command as root after install:
 # lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
-
-%define _bver	14
+#
 Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
@@ -16,6 +16,7 @@ Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
 Source1:	http://downloads.sourceforge.net/lgeneral/pg-data.tar.gz
 # Source1-md5:	40c4be23f60d1dc732aabe13b58fc5e3
 Source2:	%{name}.desktop
+Patch0:		%{name}-separator.patch
 URL:		http://lgames.sourceforge.net/index.php?project=LGeneral
 BuildRequires:	SDL_mixer-devel >= 1.1.4
 BuildRequires:	autoconf
@@ -39,6 +40,7 @@ opcji jak na przykład wpływ pogody na warunki walki.
 
 %prep
 %setup -q -a 1
+%patch0 -p1
 %{__sed} -i 's@games/@@' {configure.in,src/misc.c,lgc-pg/misc.c}
 
 %build
