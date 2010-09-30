@@ -8,7 +8,7 @@ Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
 Version:	1.2
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Games/Strategy
 Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
@@ -67,6 +67,18 @@ cp -r pg-data $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+if [ "$1" = 1 ]; then
+%banner %{name} -e <<EOF
+NOTE:
+To play the game with original Panzer General campaigns and scenarios
+run this command as root after install:
+
+lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
+
+EOF
+fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
