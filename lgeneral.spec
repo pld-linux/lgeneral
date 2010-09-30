@@ -54,8 +54,8 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
-install lgeneral32.png $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}.png
 cp -r pg-data $RPM_BUILD_ROOT%{_datadir}/%{name}
+mv $RPM_BUILD_ROOT%{_iconsdir}/{lgeneral48.png,lgeneral.png}
 
 %find_lang %{name} --all-name
 
@@ -87,4 +87,4 @@ fi
 %{_datadir}/%{name}
 %{_desktopdir}/%{name}.desktop
 %{_mandir}/man[16]/*.*
-%{_pixmapsdir}/%{name}.png
+%{_iconsdir}/%{name}.png
