@@ -1,20 +1,26 @@
-Summary:	LGeneral game
-Summary(pl.UTF-8):	Gra Linux General
+# NOTE:
+# To play the game with original Panzer General campaigns and scenarios
+# we need to run this command as root after install:
+# lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
+
+%define _bver	14
+Summary:	Panzer General clone
+Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
 Version:	1.2
 Release:	0.1
-License:	GPL
-Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
+License:	GPL v2+
+Group:		X11/Applications/Games/Strategy
+Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
 # Source0-md5:	a34eae8bc2c05cfa81fe9a9994988613
-Source1:	%{name}.desktop
-Patch0:		%{name}-inst_dir.patch
-Patch1:		%{name}-configure_fix.patch
+Source1:	http://downloads.sourceforge.net/lgeneral/pg-data.tar.gz
+# Source1-md5:	40c4be23f60d1dc732aabe13b58fc5e3
+Source2:	%{name}.desktop
 URL:		http://lgames.sourceforge.net/index.php?project=LGeneral
+BuildRequires:	SDL_mixer-devel >= 1.1.4
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	SDL_mixer-devel >= 1.1.4
-Requires:	lgeneral-data >= 1.1
+BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -26,54 +32,45 @@ influence, reinforcements and other implementations contribute to the
 tactical and strategic depth of the game.
 
 %description -l pl.UTF-8
-LGeneral jest turową grą strategiczną zainspirowaną o Panzer General.
-Można grać scenariusze albo kampanie, przeciwko drugiemu graczowi albo
-komputerowi. Gra posiada dużo zaawansowanych opcji tj. wpływ pogody na
-warunki walki.
+LGeneral jest turową grą strategiczną zainspirowaną przez Panzer
+General. Gracz rozgrywa scenariusze lub całe kampanie przeciwko
+drugiemu graczowi lub komputerowi. Gra posiada dużo zaawansowanych
+opcji jak na przykład wpływ pogody na warunki walki.
 
 %prep
-%setup -q
-#%patch0 -p1
-#%patch1 -p1
+%setup -q -a 1
+%{__sed} -i 's@games/@@' {configure.in,src/misc.c,lgc-pg/misc.c}
 
 %build
-%{__aclocal}
-%{__automake}
-%{__autoconf}
 %configure
 
-%{__make}
+#Maybe somebody know better way?
+cp %{_datadir}/gettext/config.rpath .
+%{__make} \
+	ACLOCAL="%{__aclocal}" \
+	AUTOMAKE="%{__automake}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_desktopdir}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
+install lgeneral32.png $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}.png
+cp -r pg-data $RPM_BUILD_ROOT%{_datadir}/%{name}
+
+%find_lang %{name} --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README.lgeneral TODO
+%doc AUTHORS ChangeLog README.lg* TODO
 %attr(755,root,root) %{_bindir}/*
-%dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/ai_modules
-%dir %{_datadir}/%{name}/campaigns
-%dir %{_datadir}/%{name}/gfx
-%dir %{_datadir}/%{name}/gfx/flags
-%dir %{_datadir}/%{name}/gfx/terrain
-%dir %{_datadir}/%{name}/gfx/units
-%{_datadir}/%{name}/gfx/*.bmp
-%dir %{_datadir}/%{name}/maps
-%dir %{_datadir}/%{name}/music
-%dir %{_datadir}/%{name}/nations
-%dir %{_datadir}/%{name}/scenarios
-%dir %{_datadir}/%{name}/sounds
-%dir %{_datadir}/%{name}/themes
-%{_datadir}/%{name}/themes/*
-%dir %{_datadir}/%{name}/units
+%{_datadir}/%{name}
 %{_desktopdir}/%{name}.desktop
+%{_mandir}/man[16]/*.*
+%{_pixmapsdir}/%{name}.png
