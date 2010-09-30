@@ -1,9 +1,3 @@
-#
-# NOTE:
-# To play the game with original Panzer General campaigns and scenarios
-# we need to run this command as root after install:
-# lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
-#
 Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
@@ -41,7 +35,7 @@ opcji jak na przykład wpływ pogody na warunki walki.
 %prep
 %setup -q -a 1
 %patch0 -p1
-%{__sed} -i 's@games/@@' {configure.in,src/misc.c,lgc-pg/misc.c}
+%{__sed} -i 's@games/@@' configure.in
 
 %build
 %configure
@@ -72,10 +66,16 @@ rm -rf $RPM_BUILD_ROOT
 if [ "$1" = 1 ]; then
 %banner %{name} -e <<EOF
 NOTE:
-To play the game with original Panzer General campaigns and scenarios
-run this command as root after install:
+If you have the orginal Panzer General CD then mount it
+(e.g., to /mnt/cdrom) and run the following command as root user:
 
-lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
+	lgc-pg -s /mnt/cdrom/DAT -d /usr/share/lgeneral
+
+If you do not have the orginal Panzer General
+CD, you can use the abandonware pg-data package
+by run the following command as root user:
+
+	lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
 
 EOF
 fi
