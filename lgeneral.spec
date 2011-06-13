@@ -1,12 +1,12 @@
 Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
-Version:	1.2
+Version:	1.2.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Games/Strategy
 Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
-# Source0-md5:	a34eae8bc2c05cfa81fe9a9994988613
+# Source0-md5:	e77c9ba4ef1a38b84146333d85f883d0
 Source1:	http://downloads.sourceforge.net/lgeneral/pg-data.tar.gz
 # Source1-md5:	40c4be23f60d1dc732aabe13b58fc5e3
 Source2:	%{name}.desktop
