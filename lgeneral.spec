@@ -1,16 +1,15 @@
 Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
-Version:	1.2.1
+Version:	1.2.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Games/Strategy
 Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
-# Source0-md5:	e77c9ba4ef1a38b84146333d85f883d0
+# Source0-md5:	aa2a591a2f069a4dae530ff6920303cb
 Source1:	http://downloads.sourceforge.net/lgeneral/pg-data.tar.gz
 # Source1-md5:	40c4be23f60d1dc732aabe13b58fc5e3
 Source2:	%{name}.desktop
-Patch0:		%{name}-separator.patch
 URL:		http://lgames.sourceforge.net/index.php?project=LGeneral
 BuildRequires:	SDL_mixer-devel >= 1.1.4
 BuildRequires:	autoconf
@@ -35,15 +34,14 @@ opcji jak na przykład wpływ pogody na warunki walki.
 
 %prep
 %setup -q -a 1
-%patch0 -p1
 %{__sed} -i 's@games/@@' configure.in
+#Maybe somebody know better way?
+cp %{_datadir}/gettext/config.rpath .
 
 %build
 %configure
 
-#Maybe somebody know better way?
-cp %{_datadir}/gettext/config.rpath .
-%{__make} \
+%{__make} -j1 \
 	ACLOCAL="%{__aclocal}" \
 	AUTOMAKE="%{__automake}"
 
