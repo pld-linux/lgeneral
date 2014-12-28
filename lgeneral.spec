@@ -14,7 +14,7 @@ URL:		http://lgames.sourceforge.net/index.php?project=LGeneral
 BuildRequires:	SDL_mixer-devel >= 1.1.4
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
