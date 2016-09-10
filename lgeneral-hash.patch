@@ -1,0 +1,65 @@
+--- lgeneral-1.3.1/tools/ltrextract/util.c.orig	2013-05-03 19:17:34.000000000 +0200
++++ lgeneral-1.3.1/tools/ltrextract/util.c	2016-09-09 22:22:56.191662113 +0200
+@@ -26,7 +26,7 @@
+ 
+ #include "util.h"
+ 
+-#include "intl/hash-string.h"
++#include "util/localize.h"
+ #include "util/hashtable.h"
+ #include "util/hashtable_itr.h"
+ 
+--- lgeneral-1.3.1/util/localize.c.orig	2013-05-03 19:17:37.000000000 +0200
++++ lgeneral-1.3.1/util/localize.c	2016-09-09 22:22:38.928328978 +0200
+@@ -28,8 +28,6 @@
+ #include "hashtable.h"
+ #include "paths.h"
+ 
+-#include "intl/hash-string.h"
+-
+ #include <assert.h>
+ #include <locale.h>
+ #include <stdlib.h>
+@@ -231,4 +229,30 @@ void locale_init(const char *lang) {
+ #endif
+ }
+ 
++/* Defines the so called `hashpjw' function by P.J. Weinberger
++   [see Aho/Sethi/Ullman, COMPILERS: Principles, Techniques and Tools,
++   1986, 1987 Bell Telephone Laboratories, Inc.]  */
++#define HASHWORDBITS 32
++unsigned long int
++hash_string (const char *str_param)
++{
++  unsigned long int hval, g;
++  const char *str = str_param;
++
++  /* Compute the hash value for the given string.  */
++  hval = 0;
++  while (*str != '\0')
++    {
++      hval <<= 4;
++      hval += (unsigned char) *str++;
++      g = hval & ((unsigned long int) 0xf << (HASHWORDBITS - 4));
++      if (g != 0)
++	{
++	  hval ^= g >> (HASHWORDBITS - 8);
++	  hval ^= g;
++	}
++    }
++  return hval;
++}
++
+ /* kate: tab-indents on; space-indent on; replace-tabs off; indent-width 2; dynamic-word-wrap off; inden(t)-mode cstyle */
+--- lgeneral-1.3.1/util/localize.h.orig	2013-05-03 19:17:37.000000000 +0200
++++ lgeneral-1.3.1/util/localize.h	2016-09-09 22:21:47.598329561 +0200
+@@ -72,6 +72,9 @@ void locale_write_ordinal_number(char *b
+  */
+ void locale_init(const char *lang);
+ 
++unsigned long int
++hash_string (const char *str_param);
++
+ #endif /*UTIL_LOCALIZE_H*/
+ 
+ /* kate: tab-indents on; space-indent on; replace-tabs off; indent-width 2; dynamic-word-wrap off; inden(t)-mode cstyle */

@@ -10,12 +10,16 @@ Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
 Source1:	http://downloads.sourceforge.net/lgeneral/pg-data.tar.gz
 # Source1-md5:	40c4be23f60d1dc732aabe13b58fc5e3
 Source2:	%{name}.desktop
-URL:		http://lgames.sourceforge.net/index.php?project=LGeneral
-BuildRequires:	SDL_mixer-devel >= 1.1.4
+Patch0:		%{name}-hash.patch
+Patch1:		%{name}-format.patch
+URL:		http://lgames.sourceforge.net/LGeneral
+BuildRequires:	SDL-devel >= 1.1.4
+BuildRequires:	SDL_mixer-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-tools
 BuildRequires:	sed >= 4.0
+Requires:	SDL >= 1.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,17 +37,22 @@ drugiemu graczowi lub komputerowi. Gra posiada dużo zaawansowanych
 opcji jak na przykład wpływ pogody na warunki walki.
 
 %prep
-%setup -q -a 1
+%setup -q -a1
+#patch0 -p1 # if using updated intl/
+%patch1 -p1
+
 %{__sed} -i 's@games/@@' configure.in
-#Maybe somebody know better way?
-cp %{_datadir}/gettext/config.rpath .
 
 %build
+# cannot use gettextize (po/ is hacked), so just
+cp -f %{_datadir}/gettext/config.rpath .
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure
 
-%{__make} -j1 \
-	ACLOCAL="%{__aclocal}" \
-	AUTOMAKE="%{__automake}"
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -54,8 +63,9 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
 cp -r pg-data $RPM_BUILD_ROOT%{_datadir}/%{name}
-mv $RPM_BUILD_ROOT%{_iconsdir}/{lgeneral48.png,lgeneral.png}
+%{__mv} $RPM_BUILD_ROOT%{_iconsdir}/{lgeneral48.png,lgeneral.png}
 
+# lgeneral,pg domains
 %find_lang %{name} --all-name
 
 %clean
@@ -81,9 +91,29 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README.lg* TODO
-%attr(755,root,root) %{_bindir}/*
-%{_datadir}/%{name}
+%doc AUTHORS ChangeLog PanzerGeneral-Guru.txt README.{lgc-pg,lgeneral} TODO
+%attr(755,root,root) %{_bindir}/lgc-pg
+%attr(755,root,root) %{_bindir}/lged
+%attr(755,root,root) %{_bindir}/lgeneral
+%attr(755,root,root) %{_bindir}/ltrextract
+%attr(755,root,root) %{_bindir}/shptool
+%dir %{_datadir}/lgeneral
+%dir %{_datadir}/lgeneral/ai_modules
+%dir %{_datadir}/lgeneral/campaigns
+%{_datadir}/lgeneral/campaigns/PG
+%{_datadir}/lgeneral/convdata
+%{_datadir}/lgeneral/gfx
+%dir %{_datadir}/lgeneral/maps
+%dir %{_datadir}/lgeneral/music
+%dir %{_datadir}/lgeneral/nations
+%{_datadir}/lgeneral/pg-data
+%dir %{_datadir}/lgeneral/scenarios
+%dir %{_datadir}/lgeneral/sounds
+%dir %{_datadir}/lgeneral/terrain
+%dir %{_datadir}/lgeneral/themes
+%{_datadir}/lgeneral/themes/default
+%dir %{_datadir}/lgeneral/units
 %{_desktopdir}/%{name}.desktop
-%{_mandir}/man[16]/*.*
+%{_mandir}/man1/lgc-pg.1*
+%{_mandir}/man6/lgeneral.6*
 %{_iconsdir}/%{name}.png
