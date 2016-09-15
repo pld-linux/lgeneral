@@ -7,9 +7,7 @@ License:	GPL v2+
 Group:		X11/Applications/Games/Strategy
 Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
 # Source0-md5:	aa2a591a2f069a4dae530ff6920303cb
-Source1:	http://downloads.sourceforge.net/lgeneral/pg-data.tar.gz
-# Source1-md5:	40c4be23f60d1dc732aabe13b58fc5e3
-Source2:	%{name}.desktop
+Source1:	%{name}.desktop
 Patch0:		%{name}-hash.patch
 Patch1:		%{name}-format.patch
 URL:		http://lgames.sourceforge.net/LGeneral
@@ -37,7 +35,7 @@ drugiemu graczowi lub komputerowi. Gra posiada dużo zaawansowanych
 opcji jak na przykład wpływ pogody na warunki walki.
 
 %prep
-%setup -q -a1
+%setup -q
 #patch0 -p1 # if using updated intl/
 %patch1 -p1
 
@@ -61,8 +59,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
-cp -r pg-data $RPM_BUILD_ROOT%{_datadir}/%{name}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
 %{__mv} $RPM_BUILD_ROOT%{_iconsdir}/{lgeneral48.png,lgeneral.png}
 
 # lgeneral,pg domains
@@ -81,8 +78,8 @@ If you have the orginal Panzer General CD then mount it
 	lgc-pg -s /mnt/cdrom/DAT -d /usr/share/lgeneral
 
 If you do not have the orginal Panzer General
-CD, you can use the abandonware pg-data package
-by run the following command as root user:
+CD, you can use the abandonware lgeneral-data-pg package
+by (after installing it) running the following command as root user:
 
 	lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
 
@@ -106,7 +103,6 @@ fi
 %dir %{_datadir}/lgeneral/maps
 %dir %{_datadir}/lgeneral/music
 %dir %{_datadir}/lgeneral/nations
-%{_datadir}/lgeneral/pg-data
 %dir %{_datadir}/lgeneral/scenarios
 %dir %{_datadir}/lgeneral/sounds
 %dir %{_datadir}/lgeneral/terrain
