@@ -1,0 +1,10 @@
+--- lgeneral-1.3.1/lgeneral.desktop.orig	2015-03-10 18:05:04.000000000 +0100
++++ lgeneral-1.3.1/lgeneral.desktop	2016-09-16 15:57:14.331687280 +0200
+@@ -2,6 +2,7 @@
+ Name=LGeneral
+ Comment=LGeneral is a turn-based strategy engine heavily inspired by Panzer General
+ Comment[de]=LGeneral ist eine rundenbasierte Engine für Strategiespiele und wurde stark von Panzer General inspiriert
++Comment[pl]=LGeneral to silnik turowej gry strategicznej zainspirowanej gr± Panzer General
+ Exec=lgeneral
+ Icon=lgeneral
+ Type=Application

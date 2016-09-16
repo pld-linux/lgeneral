@@ -1,15 +1,14 @@
 Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
-Version:	1.2.2
+Version:	1.3.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Games/Strategy
 Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
-# Source0-md5:	aa2a591a2f069a4dae530ff6920303cb
-Source1:	%{name}.desktop
-Patch0:		%{name}-hash.patch
-Patch1:		%{name}-format.patch
+# Source0-md5:	7605ccf7eac6ce7a8c36b6db0613ceb6
+Patch0:		%{name}-desktop.patch
+Patch1:		%{name}-hash.patch
 URL:		http://lgames.sourceforge.net/LGeneral
 BuildRequires:	SDL-devel >= 1.1.4
 BuildRequires:	SDL_mixer-devel
@@ -36,8 +35,8 @@ opcji jak na przykład wpływ pogody na warunki walki.
 
 %prep
 %setup -q
-#patch0 -p1 # if using updated intl/
-%patch1 -p1
+%patch0 -p1
+#patch1 -p1 # if using updated intl/
 
 %{__sed} -i 's@games/@@' configure.in
 
@@ -54,13 +53,9 @@ cp -f %{_datadir}/gettext/config.rpath .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
-%{__mv} $RPM_BUILD_ROOT%{_iconsdir}/{lgeneral48.png,lgeneral.png}
 
 # lgeneral,pg domains
 %find_lang %{name} --all-name
@@ -88,7 +83,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog PanzerGeneral-Guru.txt README.{lgc-pg,lgeneral} TODO
+%doc AUTHORS ChangeLog README.{lgc-pg,lgeneral} TODO
 %attr(755,root,root) %{_bindir}/lgc-pg
 %attr(755,root,root) %{_bindir}/lged
 %attr(755,root,root) %{_bindir}/lgeneral
@@ -109,7 +104,7 @@ fi
 %dir %{_datadir}/lgeneral/themes
 %{_datadir}/lgeneral/themes/default
 %dir %{_datadir}/lgeneral/units
-%{_desktopdir}/%{name}.desktop
+%{_desktopdir}/lgeneral.desktop
 %{_mandir}/man1/lgc-pg.1*
 %{_mandir}/man6/lgeneral.6*
-%{_iconsdir}/%{name}.png
+%{_iconsdir}/hicolor/48x48/apps/lgeneral.png
