@@ -1,5 +1,6 @@
 # TODO:
 # - lgeneral-redit: make it installable (source dir paths in main.c, misc.c), build&install
+# - package addons from http://lgames.sourceforge.net/LGeneral/addons.php (extend lgeneral-scenarios.spec?)
 Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
