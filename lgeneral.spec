@@ -1,3 +1,5 @@
+# TODO:
+# - lgeneral-redit: make it installable (source dir paths in main.c, misc.c), build&install
 Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
@@ -17,6 +19,7 @@ BuildRequires:	automake
 BuildRequires:	gettext-tools
 BuildRequires:	sed >= 4.0
 Requires:	SDL >= 1.1.4
+Suggests:	%{name}-tools = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -32,6 +35,19 @@ LGeneral jest turową grą strategiczną zainspirowaną przez Panzer
 General. Gracz rozgrywa scenariusze lub całe kampanie przeciwko
 drugiemu graczowi lub komputerowi. Gra posiada dużo zaawansowanych
 opcji jak na przykład wpływ pogody na warunki walki.
+
+%package tools
+Summary:	Tools to manipulate LGeneral data files
+Summary(pl.UTF-8):	Narzędzia do operacji na plikach danych gry LGeneral
+Group:		X11/Applications/Games/Strategy
+Requires:	SDL >= 1.1.4
+Conflicts:	lgeneral < 1.3.1
+
+%description tools
+Tools to manipulate LGeneral data files.
+
+%description tools -l pl.UTF-8
+Narzędzia do operacji na plikach danych gry LGeneral.
 
 %prep
 %setup -q
@@ -78,22 +94,18 @@ by (after installing it) running the following command as root user:
 
 	lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
 
+Note: the above commands require %{name}-tools package.
 EOF
 fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README.{lgc-pg,lgeneral} TODO
-%attr(755,root,root) %{_bindir}/lgc-pg
-%attr(755,root,root) %{_bindir}/lged
 %attr(755,root,root) %{_bindir}/lgeneral
-%attr(755,root,root) %{_bindir}/ltrextract
-%attr(755,root,root) %{_bindir}/shptool
 %dir %{_datadir}/lgeneral
 %dir %{_datadir}/lgeneral/ai_modules
 %dir %{_datadir}/lgeneral/campaigns
 %{_datadir}/lgeneral/campaigns/PG
-%{_datadir}/lgeneral/convdata
 %{_datadir}/lgeneral/gfx
 %dir %{_datadir}/lgeneral/maps
 %dir %{_datadir}/lgeneral/music
@@ -105,6 +117,16 @@ fi
 %{_datadir}/lgeneral/themes/default
 %dir %{_datadir}/lgeneral/units
 %{_desktopdir}/lgeneral.desktop
-%{_mandir}/man1/lgc-pg.1*
 %{_mandir}/man6/lgeneral.6*
 %{_iconsdir}/hicolor/48x48/apps/lgeneral.png
+
+%files tools
+%defattr(644,root,root,755)
+%doc lgc-pg/convdata/COPYING
+%attr(755,root,root) %{_bindir}/lgc-pg
+%attr(755,root,root) %{_bindir}/lged
+%attr(755,root,root) %{_bindir}/ltrextract
+%attr(755,root,root) %{_bindir}/shptool
+%dir %{_datadir}/lgeneral
+%{_datadir}/lgeneral/convdata
+%{_mandir}/man1/lgc-pg.1*
