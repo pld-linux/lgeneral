@@ -84,18 +84,18 @@ rm -rf $RPM_BUILD_ROOT
 if [ "$1" = 1 ]; then
 %banner %{name} -e <<EOF
 NOTE:
+LGeneral requires some data pack.
+
 If you have the orginal Panzer General CD then mount it
-(e.g., to /mnt/cdrom) and run the following command as root user:
+(e.g., to /media/cdrom) and (having %{name}-tools package installed)
+run the following command as root user:
 
-	lgc-pg -s /mnt/cdrom/DAT -d /usr/share/lgeneral
+	lgc-pg -s /media/cdrom/DAT -d /usr/share/lgeneral
 
-If you do not have the orginal Panzer General
-CD, you can use the abandonware lgeneral-data-pg package
-by (after installing it) running the following command as root user:
+If you do not have the original Panzer General CD, you can use
+the abandonware lgeneral-data-pg package.
 
-	lgc-pg -s /usr/share/lgeneral/pg-data -d /usr/share/lgeneral
-
-Note: the above commands require %{name}-tools package.
+Or you can use free lgeneral-data-kukgen data based on k.u.k General.
 EOF
 fi
 
