@@ -5,7 +5,7 @@ Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
 Version:	1.3.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications/Games/Strategy
 Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
@@ -73,6 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+# Needed by addons
+install -d $RPM_BUILD_ROOT%{_datadir}/lgeneral/gfx/{flags,terrain,units}
 
 # lgeneral,pg domains
 %find_lang %{name} --all-name
