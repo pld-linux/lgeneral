@@ -4,18 +4,18 @@
 Summary:	Panzer General clone
 Summary(pl.UTF-8):	Klon gry Panzer General
 Name:		lgeneral
-Version:	1.3.1
-Release:	2
+Version:	1.4.4
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Games/Strategy
 Source0:	http://downloads.sourceforge.net/lgeneral/%{name}-%{version}.tar.gz
-# Source0-md5:	7605ccf7eac6ce7a8c36b6db0613ceb6
+# Source0-md5:	87a56162e77cf20418137e156026d044
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-hash.patch
-URL:		http://lgames.sourceforge.net/LGeneral
+URL:		https://lgames.sourceforge.net/LGeneral
 BuildRequires:	SDL-devel >= 1.1.4
 BuildRequires:	SDL_mixer-devel
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake
 BuildRequires:	gettext-tools
 BuildRequires:	sed >= 4.0
@@ -52,18 +52,18 @@ Narzędzia do operacji na plikach danych gry LGeneral.
 
 %prep
 %setup -q
-%patch0 -p1
-#patch1 -p1 # if using updated intl/
-
-%{__sed} -i 's@games/@@' configure.in
+%patch -P0 -p1
+#patch -P1 -p1 # if using updated intl/
 
 %build
-# cannot use gettextize (po/ is hacked), so just
-cp -f %{_datadir}/gettext/config.rpath .
+%if 0
+# cannot use gettextize (po/ is hacked), but incompatible with current gettext
+#cp -f %{_datadir}/gettext/config.rpath .
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+%endif
 %configure
 
 %{__make} -j1
